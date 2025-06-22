@@ -1,0 +1,3 @@
+[submodule "resctl-demo"]
+	path = resctl-demo
+	url = git@github.com:isstaif/resctl-demo.git
