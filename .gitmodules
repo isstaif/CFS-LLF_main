@@ -5,3 +5,4 @@
 [submodule "linux"]
 	path = linux
 	url = git@github.com:isstaif/linux.git
+	branch = CFS-LLF
