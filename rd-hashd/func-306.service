@@ -1,0 +1,16 @@
+[Unit]
+Description=Function stress
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/home/aati2
+ExecStart=/home/aati2/resctl-demo/target/rd-hashd --args /local/scratch/rd-hashd/args-306.json
+CPUAccounting=yes
+CPUShares=1024
+Slice=faas.slice
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

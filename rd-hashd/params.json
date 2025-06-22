@@ -1,0 +1,98 @@
+# //
+# // rd-hashd runtime parameters
+# //
+# // All parameters can be updated while running and will be applied immediately.
+# //
+# // rd-hashd keeps calculating SHA1s of different parts of testfiles using
+# // concurrent worker threads. The testfile indices and hash sizes are
+# // determined using truncated normal distributions which gradually transforms
+# // to uniform distributions as their standard deviations increase.
+# //
+# // All durations are in seconds and memory bytes. A _frac field should be <=
+# // 1.0 and specifies a sub-proportion of some other value. A _ratio field is
+# // similar but may be greater than 1.0.
+# //
+# // The concurrency level is modulated using two PID controllers to target the
+# // specified latency and RPS so that neither is exceeded. The total number
+# // of concurrent threads is limited by `concurrency_max`.
+# //
+# // The total size of testfiles is set up during startup and can't be changed
+# // online. However, the portion which is actively used by rd-hashd can be
+# // scaled down with `file_total_frac`.
+# //
+# // Anonymous memory total and access sizes are configured as proportions to
+# // file access sizes.
+# //
+# // The total footprint for file accesses is scaled between
+# // `file_addr_rps_base_frac` and 1.0 linearly if the current RPS is lower than
+# // `rps_max`. If `rps_max` is 0, access footprint scaling is disabled. Anon
+# // footprint is scaled the same way between 'anon_addr_rps_base_frac' and 1.0.
+# //
+# // Worker threads will sleep according to the sleep duration distribution and
+# // their CPU consumption can be scaled up and down using `cpu_ratio`.
+# //
+# //  control_period: PID control period, best left alone
+# //  concurrency_max: Maximum number of worker threads
+# //  lat_target_pct: Latency target percentile
+# //  lat_target: Latency target
+# //  rps_target: Request-per-second target
+# //  rps_max: Reference maximum RPS, used to scale the amount of used memory
+# //  chunk_pages: Memory access chunk size in pages
+# //  mem_frac: Memory footprint scaling factor - [0.0, 1.0]
+# //  file_frac: Page cache proportion of memory footprint - [0.0, 1.0]
+# //  file_size_mean: File access size average
+# //  file_size_stdev_ratio: Standard deviation of file access sizes
+# //  file_addr_stdev_ratio: Standard deviation of file access addresses
+# //  file_addr_rps_base_frac: Memory scaling starting point for file accesses
+# //  file_write_frac: The proportion of writes in file accesses
+# //  anon_size_ratio: Anon access size average - 1.0 means equal as file accesses
+# //  anon_size_stdev_ratio: Standard deviation of anon access sizes
+# //  anon_addr_stdev_ratio: Standard deviation of anon access addresses
+# //  anon_addr_rps_base_frac: Memory scaling starting point for anon accesses
+# //  anon_write_frac: The proportion of writes in anon accesses
+# //  sleep_mean: Worker sleep duration average
+# //  sleep_stdev_ratio: Standard deviation of sleep duration distribution
+# //  cpu_ratio: CPU usage scaling - 1.0 hashes the same number of bytes as accessed
+# //  log_bps: Log write bps at rps_max
+# //  fake_cpu_load: Sleep equivalent time durations instead of calculating SHA1s
+# //  acc_dist_slots: Access distribution report slots - 0 disables
+# //  lat_pid: PID controller parameters for latency convergence
+# //  rps_pid: PID controller parameters for RPS convergence
+# //
+{
+  "control_period": 1.0,
+  "concurrency_max": 65536,
+  "lat_target_pct": 0.5,
+  "lat_target": 0.1,
+  "rps_target": 65536,
+  "rps_max": 1000,
+  "mem_frac": 0.001,
+  "chunk_pages": 25,
+  "file_frac": 0.25,
+  "file_size_mean": 377487,
+  "file_size_stdev_ratio": 0.45,
+  "file_addr_stdev_ratio": 0.215,
+  "file_addr_rps_base_frac": 0.5,
+  "file_write_frac": 0.0,
+  "anon_size_ratio": 2.3,
+  "anon_size_stdev_ratio": 0.45,
+  "anon_addr_stdev_ratio": 0.235,
+  "anon_addr_rps_base_frac": 0.5,
+  "anon_write_frac": 0.3,
+  "sleep_mean": 0.02,
+  "sleep_stdev_ratio": 0.33,
+  "cpu_ratio": 0.93,
+  "log_bps": 1100794,
+  "fake_cpu_load": false,
+  "acc_dist_slots": 0,
+  "lat_pid": {
+    "kp": 0.1,
+    "ki": 0.01,
+    "kd": 0.01
+  },
+  "rps_pid": {
+    "kp": 0.25,
+    "ki": 0.01,
+    "kd": 0.01
+  }
+}
