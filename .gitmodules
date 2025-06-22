@@ -2,3 +2,6 @@
 	path = resctl-demo
 	url = git@github.com:isstaif/resctl-demo.git
 	branch = fibo
+[submodule "linux"]
+	path = linux
+	url = git@github.com:isstaif/linux.git
