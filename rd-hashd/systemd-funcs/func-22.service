@@ -5,8 +5,8 @@ After=network.target
 [Service]
 User=root
 Group=root
-WorkingDirectory=/home/aati2
-ExecStart=/usr/local/bin/rd-hashd --args /local/scratch/rd-hashd/args-22.json
+WorkingDirectory=/home/aati2/CFS-LLF_main/rd-hashd/working-directory
+ExecStart=/usr/local/bin/rd-hashd --args /home/aati2/CFS-LLF_main/rd-hashd/args-22.json
 CPUAccounting=yes
 CPUShares=1024
 Slice=faas.slice
