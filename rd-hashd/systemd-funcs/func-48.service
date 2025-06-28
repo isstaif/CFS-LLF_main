@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User=root
 Group=root
-WorkingDirectory=/home/aati2/CFS-LLF_main/rd-hashd/working-directory
+WorkingDirectory=/home/aati2/CFS-LLF_main/rd-hashd
 ExecStart=/usr/local/bin/rd-hashd --args /home/aati2/CFS-LLF_main/rd-hashd/args-48.json
 CPUAccounting=yes
 CPUShares=1024

@@ -5,14 +5,14 @@
 // They can be overridden from command line.
 //
 {
-  "testfiles": "/local/scratch/rd-hashd/testfiles",
+  "testfiles": "results/testfiles",
   "size": 269513490432,
   "file_max_frac": 0.25,
-"trace_path": "/local/scratch/rd-hashd/azure2021/trace-355",
+  "trace_path": "azure2021/trace-355",
   "compressibility": 0.0,
-  "params": "/local/scratch/rd-hashd/params.json",
-  "report": "/local/scratch/rd-hashd/report-355.json",
-  "log_dir": "/local/scratch/rd-hashd/logs-355",
+  "params": "params.json",
+  "report": "results/report-355.json",
+  "log_dir": "results/logs-355",
   "log_size": 33689186304,
   "interval": 10,
   "rotational": null
