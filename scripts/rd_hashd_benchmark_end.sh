@@ -11,6 +11,6 @@ while [ $i -le $1 ]; do
 done
 
 echo "number of requests is"
-cat ./results/logs-*/*  | grep -a -oE '[0-9]+\.[0-9]+ms'   | wc -l
+cat ./rd-hashd/results/logs-*/*  | grep -a -oE '[0-9]+\.[0-9]+ms'   | wc -l
 
-ls ./results/logs-*
+ls ./rd-hashd/results/logs-*

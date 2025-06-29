@@ -561,7 +561,7 @@ def rd_hashd_benchmark_args_workload():
 
 
     for i in range(functions):
-        file = open(f"./rd-hashd/args-{i}.json", 'r', encoding='utf-8')
+        file = open(f"./rd-hashd/args/args-{i}.json", 'r', encoding='utf-8')
         # print(file.read())
         lines = file.readlines()
         file.close()        
