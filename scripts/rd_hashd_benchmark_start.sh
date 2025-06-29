@@ -1,4 +1,4 @@
-tail -n +1 /local/scratch/rd-hashd/params* | grep -v '\/\/'
+tail -n +1 ./params* | grep -v '\/\/'
 
 i=0
 while [ $i -le $1 ]; do
@@ -6,9 +6,8 @@ while [ $i -le $1 ]; do
   i=$(( i + 1 ))
 done
 
-rm -rf /local/scratch/rd-hashd/logs*
-rm /local/scratch/rd-hashd/report-*.json
-rm /local/scratch/rd-hashd/report-sm-*.json
+rm -rf ./results/logs*
+rm ./results/report-*.json
 
 i=0
 while [ $i -le $1 ]; do
