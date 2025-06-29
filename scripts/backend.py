@@ -403,7 +403,7 @@ def setup_patch():
 
     script = request.args.to_dict()['script']
     ema = request.args.to_dict()['ema']
-    cmd = f"./{script} {ema}"
+    cmd = f"./scripts/{script} {ema}"
 
     # offset = 300
     # if 'offset' in request.args.to_dict().keys():
@@ -446,13 +446,13 @@ def rd_hashd_benchmark_start():
     llf_str = request.args.get('llf', 'false').lower()  # Default to 'false' if the key is not present
     llf = llf_str == 'true'  # Convert string to boolean
 
-    cmd = f"./rd_hashd_benchmark_start.sh {funcs_count} {duration}"
+    cmd = f"./scripts/rd_hashd_benchmark_start.sh {funcs_count} {duration}"
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()    
 
     print('llf',llf)
     if (llf):
-        cmd = f"./setup_patch_clean_systemd.sh 1000"
+        cmd = f"./scripts/setup_patch_clean_systemd.sh 1000"
         process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
         output_llf, error_llf = process.communicate()
         return output+output_llf, error
@@ -469,14 +469,14 @@ def rd_hashd_benchmark_killall():
 
 @app.route('/rd_hashd_benchmark_reports')
 def rd_hashd_benchmark_reports():
-    cmd = f"tail -n +1 ./results/report-* | grep -v '\/\/'"
+    cmd = f"tail -n +1 ./rd-hashd/results/report-* | grep -v '\/\/'"
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
     return output, error    
 
 @app.route('/rd_hashd_benchmark_latencies_all_funcs')
 def rd_hashd_benchmark_latencies_all_funcs():
-    cmd = f"tail -n +1 ./results/logs-*/*  | grep -a -oE '[0-9]+\.[0-9]+ms|logs-sm-[0-9]+|logs-[0-9]+'"
+    cmd = f"tail -n +1 ./rd-hashd/results/logs-*/*  | grep -a -oE '[0-9]+\.[0-9]+ms|logs-sm-[0-9]+|logs-[0-9]+'"
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
     return output, error        
@@ -486,7 +486,7 @@ def rd_hashd_benchmark_end():
 
     funcs_count = request.args.to_dict()['funcs_count']
     duration = request.args.to_dict()['duration']
-    cmd = f"./rd_hashd_benchmark_end.sh {funcs_count} {duration}"
+    cmd = f"./scripts/rd_hashd_benchmark_end.sh {funcs_count} {duration}"
 
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
@@ -497,7 +497,7 @@ def rd_hashd_benchmark_hetro_start():
 
     funcs_count = request.args.to_dict()['funcs_count']
     funcs_sm_count = request.args.to_dict()['funcs_sm_count']
-    cmd = f"./rd_hashd_benchmark_hetro_start.sh {funcs_count} {funcs_sm_count}"
+    cmd = f"./scripts/rd_hashd_benchmark_hetro_start.sh {funcs_count} {funcs_sm_count}"
 
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
@@ -508,7 +508,7 @@ def rd_hashd_benchmark_hetro_end():
 
     funcs_count = request.args.to_dict()['funcs_count']
     funcs_sm_count = request.args.to_dict()['funcs_sm_count']
-    cmd = f"./rd_hashd_benchmark_hetro_end.sh {funcs_count} {funcs_sm_count}"
+    cmd = f"./scripts/rd_hashd_benchmark_hetro_end.sh {funcs_count} {funcs_sm_count}"
 
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
@@ -518,7 +518,7 @@ def rd_hashd_benchmark_hetro_end():
 def rd_hashd_benchmark_singlecgroup_start():
 
     funcs_count = request.args.to_dict()['funcs_count']
-    cmd = f"./rd_hashd_benchmark_10processes_singlecgroup.sh {funcs_count}"
+    cmd = f"./scripts/rd_hashd_benchmark_10processes_singlecgroup.sh {funcs_count}"
 
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
@@ -528,7 +528,7 @@ def rd_hashd_benchmark_singlecgroup_start():
 def rd_hashd_benchmark_singlecgroup_end():
 
     funcs_count = request.args.to_dict()['funcs_count']
-    cmd = f"./rd_hashd_benchmark_10processes_singlecgroup_end.sh {funcs_count}"
+    cmd = f"./scripts/rd_hashd_benchmark_10processes_singlecgroup_end.sh {funcs_count}"
 
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
@@ -561,7 +561,7 @@ def rd_hashd_benchmark_args_workload():
 
 
     for i in range(functions):
-        file = open(f"/local/scratch/rd-hashd/args-{i}.json", 'r', encoding='utf-8')
+        file = open(f"./rd-hashd/args-{i}.json", 'r', encoding='utf-8')
         # print(file.read())
         lines = file.readlines()
         file.close()        
@@ -577,11 +577,11 @@ def rd_hashd_benchmark_args_workload():
     #     copy.insert(10, line)
     #     print(copy)
 
-        f = open(f"/local/scratch/rd-hashd/args-{i}.json", "w")
+        f = open(f"./rd-hashd/args/args-{i}.json", "w")
         f.writelines(lines)
         f.close()    
 
-    cmd = f"tail -n +1 /local/scratch/rd-hashd/args* | grep 'trace_path'"
+    cmd = f"tail -n +1 ./rd-hashd/args/args* | grep 'trace_path'"
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
     return output,error
