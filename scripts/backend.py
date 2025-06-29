@@ -403,7 +403,7 @@ def setup_patch():
 
     script = request.args.to_dict()['script']
     ema = request.args.to_dict()['ema']
-    cmd = f"/home/aati2/{script} {ema}"
+    cmd = f"./{script} {ema}"
 
     # offset = 300
     # if 'offset' in request.args.to_dict().keys():
@@ -446,13 +446,13 @@ def rd_hashd_benchmark_start():
     llf_str = request.args.get('llf', 'false').lower()  # Default to 'false' if the key is not present
     llf = llf_str == 'true'  # Convert string to boolean
 
-    cmd = f"/home/aati2/rd_hashd_benchmark_start.sh {funcs_count} {duration}"
+    cmd = f"./rd_hashd_benchmark_start.sh {funcs_count} {duration}"
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()    
 
     print('llf',llf)
     if (llf):
-        cmd = f"/home/aati2/setup_patch_clean_systemd.sh 1000"
+        cmd = f"./setup_patch_clean_systemd.sh 1000"
         process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
         output_llf, error_llf = process.communicate()
         return output+output_llf, error
@@ -486,7 +486,7 @@ def rd_hashd_benchmark_end():
 
     funcs_count = request.args.to_dict()['funcs_count']
     duration = request.args.to_dict()['duration']
-    cmd = f"/home/aati2/rd_hashd_benchmark_end.sh {funcs_count} {duration}"
+    cmd = f"./rd_hashd_benchmark_end.sh {funcs_count} {duration}"
 
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
@@ -497,7 +497,7 @@ def rd_hashd_benchmark_hetro_start():
 
     funcs_count = request.args.to_dict()['funcs_count']
     funcs_sm_count = request.args.to_dict()['funcs_sm_count']
-    cmd = f"/home/aati2/rd_hashd_benchmark_hetro_start.sh {funcs_count} {funcs_sm_count}"
+    cmd = f"./rd_hashd_benchmark_hetro_start.sh {funcs_count} {funcs_sm_count}"
 
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
@@ -508,7 +508,7 @@ def rd_hashd_benchmark_hetro_end():
 
     funcs_count = request.args.to_dict()['funcs_count']
     funcs_sm_count = request.args.to_dict()['funcs_sm_count']
-    cmd = f"/home/aati2/rd_hashd_benchmark_hetro_end.sh {funcs_count} {funcs_sm_count}"
+    cmd = f"./rd_hashd_benchmark_hetro_end.sh {funcs_count} {funcs_sm_count}"
 
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
@@ -518,7 +518,7 @@ def rd_hashd_benchmark_hetro_end():
 def rd_hashd_benchmark_singlecgroup_start():
 
     funcs_count = request.args.to_dict()['funcs_count']
-    cmd = f"/home/aati2/rd_hashd_benchmark_10processes_singlecgroup.sh {funcs_count}"
+    cmd = f"./rd_hashd_benchmark_10processes_singlecgroup.sh {funcs_count}"
 
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
@@ -528,7 +528,7 @@ def rd_hashd_benchmark_singlecgroup_start():
 def rd_hashd_benchmark_singlecgroup_end():
 
     funcs_count = request.args.to_dict()['funcs_count']
-    cmd = f"/home/aati2/rd_hashd_benchmark_10processes_singlecgroup_end.sh {funcs_count}"
+    cmd = f"./rd_hashd_benchmark_10processes_singlecgroup_end.sh {funcs_count}"
 
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
@@ -538,7 +538,7 @@ def rd_hashd_benchmark_singlecgroup_end():
 def function_profile_enabled():
     enabled = request.args.to_dict()['enabled']
 
-    cmd = "/home/aati2/ftrace_schedule_overhead.sh"
+    cmd = "./ftrace_schedule_overhead.sh"
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
 
