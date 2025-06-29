@@ -53,11 +53,11 @@ echo "/sys/fs/cgroup/cpu/*/cpu.latency_awareness"
 echo "/sys/fs/cgroup/cpu/*/*/cpu.latency_awareness"
 echo "/sys/fs/cgroup/cpu/*/*/*/cpu.latency_awareness"
 echo "/sys/fs/cgroup/cpu/*/*/*/*/cpu.latency_awareness"
-echo '0' | sudo tee -a /sys/fs/cgroup/cpu/cpu.latency_awareness
-echo '0' | sudo tee -a /sys/fs/cgroup/cpu/*/cpu.latency_awareness
-echo '0' | sudo tee -a /sys/fs/cgroup/cpu/*/*/cpu.latency_awareness
-echo '0' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/cpu.latency_awareness
-echo '0' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/*/cpu.latency_awareness
+#echo '0' | sudo tee -a /sys/fs/cgroup/cpu/cpu.latency_awareness
+echo '0' | sudo tee -a /sys/fs/cgroup/*/cpu.latency_awareness
+echo '0' | sudo tee -a /sys/fs/cgroup/*/*/cpu.latency_awareness
+echo '0' | sudo tee -a /sys/fs/cgroup/*/*/*/cpu.latency_awareness
+echo '0' | sudo tee -a /sys/fs/cgroup/*/*/*/*/cpu.latency_awareness
 
 
 # sudo sysctl kernel.sched_cfs_rq_is_idle_if_no_latency_awareness=1

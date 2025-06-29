@@ -48,11 +48,11 @@ echo "/sys/fs/cgroup/cpu/*/cpu.latency_awareness"
 echo "/sys/fs/cgroup/cpu/*/*/cpu.latency_awareness"
 echo "/sys/fs/cgroup/cpu/*/*/*/cpu.latency_awareness"
 echo "/sys/fs/cgroup/cpu/*/*/*/*/cpu.latency_awareness"
-echo '0' | sudo tee -a /sys/fs/cgroup/cpu/cpu.latency_awareness
-echo '0' | sudo tee -a /sys/fs/cgroup/cpu/*/cpu.latency_awareness
-echo '0' | sudo tee -a /sys/fs/cgroup/cpu/*/*/cpu.latency_awareness
-echo '0' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/cpu.latency_awareness
-echo '0' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/*/cpu.latency_awareness
+#echo '0' | sudo tee -a /sys/fs/cgroup/cpu/cpu.latency_awareness
+echo '0' | sudo tee -a /sys/fs/cgroup/*/cpu.latency_awareness
+echo '0' | sudo tee -a /sys/fs/cgroup/*/*/cpu.latency_awareness
+echo '0' | sudo tee -a /sys/fs/cgroup/*/*/*/cpu.latency_awareness
+echo '0' | sudo tee -a /sys/fs/cgroup/*/*/*/*/cpu.latency_awareness
 echo "-----"
 
 # echo "setting latency awawreness flags"
@@ -62,7 +62,7 @@ echo "/sys/fs/cgroup/cpu/faas.slice/*/cpu.latency_awareness"
 # echo "/sys/fs/cgroup/cpu/kubepods.slice/kubepods-burstable.slice/*/*/cpu.latency_awareness"
 # echo '1' | sudo tee -a /sys/fs/cgroup/cpu/kubepods.slice/cpu.latency_awareness
 # echo '1' | sudo tee -a /sys/fs/cgroup/cpu/kubepods.slice/kubepods-burstable.slice/cpu.latency_awareness
-echo '1' | sudo tee -a /sys/fs/cgroup/cpu/faas.slice/*/cpu.latency_awareness
+echo '1' | sudo tee -a /sys/fs/cgroup/faas.slice/*/cpu.latency_awareness
 # echo '1' | sudo tee -a /sys/fs/cgroup/cpu/kubepods.slice/kubepods-burstable.slice/*/*/cpu.latency_awareness
 echo "--------"
 
