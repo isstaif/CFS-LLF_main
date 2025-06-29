@@ -469,14 +469,14 @@ def rd_hashd_benchmark_killall():
 
 @app.route('/rd_hashd_benchmark_reports')
 def rd_hashd_benchmark_reports():
-    cmd = f"tail -n +1 /local/scratch/rd-hashd/report-* | grep -v '\/\/'"
+    cmd = f"tail -n +1 ./results/report-* | grep -v '\/\/'"
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
     return output, error    
 
 @app.route('/rd_hashd_benchmark_latencies_all_funcs')
 def rd_hashd_benchmark_latencies_all_funcs():
-    cmd = f"tail -n +1 /local/scratch/rd-hashd/logs-*/*  | grep -a -oE '[0-9]+\.[0-9]+ms|logs-sm-[0-9]+|logs-[0-9]+'"
+    cmd = f"tail -n +1 ./results/logs-*/*  | grep -a -oE '[0-9]+\.[0-9]+ms|logs-sm-[0-9]+|logs-[0-9]+'"
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
     return output, error        
