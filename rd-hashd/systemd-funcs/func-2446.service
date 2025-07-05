@@ -1,0 +1,16 @@
+[Unit]
+Description=Function stress
+After=network.target
+
+[Service]
+User=root
+Group=root
+WorkingDirectory=/home/aati2/CFS-LLF_main/rd-hashd
+ExecStart=/usr/local/bin/rd-hashd --args args/args-2446.json
+CPUAccounting=yes
+CPUShares=1024
+Slice=faas.slice
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

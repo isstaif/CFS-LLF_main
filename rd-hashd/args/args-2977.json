@@ -1,0 +1,19 @@
+//
+// rd-hashd command line arguments
+//
+// This file provides the base values for a subset of command line arguments.
+// They can be overridden from command line.
+//
+{
+  "testfiles": "results/testfiles",
+  "size": 269513490432,
+  "file_max_frac": 0.25,
+//"trace_path": "/local/scratch/rd-hashd/none/trace-2977",
+  "compressibility": 0.0,
+  "params": "params.json",
+  "report": "results/report-2977.json",
+  "log_dir": "results/logs-2977",
+  "log_size": 33689186304,
+  "interval": 10,
+  "rotational": null
+}
