@@ -8,7 +8,7 @@
   "testfiles": "results/testfiles",
   "size": 269513490432,
   "file_max_frac": 0.25,
-  "trace_path": "azure2021/trace-166",
+//"trace_path": "/local/scratch/rd-hashd/none/trace-166",
   "compressibility": 0.0,
   "params": "params.json",
   "report": "results/report-166.json",
