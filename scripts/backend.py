@@ -442,9 +442,12 @@ def rd_hashd_benchmark_start():
 
     funcs_count = request.args.to_dict()['funcs_count']
     duration = request.args.to_dict()['duration']
-    llf = request.args.to_dict()['llf']
+    llf = request.args.to_dict()['llf']    
     llf_str = request.args.get('llf', 'false').lower()  # Default to 'false' if the key is not present
     llf = llf_str == 'true'  # Convert string to boolean
+
+    ema = request.args.to_dict()['ema']
+
 
     cmd = f"./scripts/rd_hashd_benchmark_start.sh {funcs_count} {duration}"
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
