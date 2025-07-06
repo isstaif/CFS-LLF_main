@@ -455,7 +455,7 @@ def rd_hashd_benchmark_start():
 
     print('llf',llf)
     if (llf):
-        cmd = f"./scripts/setup_patch_clean_systemd.sh 1000"
+        cmd = f"./scripts/setup_patch_clean_systemd.sh {ema}"
         process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
         output_llf, error_llf = process.communicate()
         return output+output_llf, error
