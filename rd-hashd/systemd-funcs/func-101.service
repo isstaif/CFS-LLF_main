@@ -9,6 +9,8 @@ WorkingDirectory=/home/aati2/CFS-LLF_main/rd-hashd
 ExecStart=/usr/local/bin/rd-hashd --args args/args-101.json
 CPUAccounting=yes
 CPUShares=1024
+AllowedCPUs=0-6,56-62
+AllowedMemoryNodes=0
 Slice=faas.slice
 RestartSec=5
 
