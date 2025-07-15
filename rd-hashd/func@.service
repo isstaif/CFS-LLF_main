@@ -1,0 +1,17 @@
+[Unit]
+Description=Function stress %i
+After=network.target
+
+[Service]
+User=root
+Group=root
+ExecStart=/usr/local/bin/start-rd-hashd.sh args/args-%i.json
+CPUAccounting=yes
+CPUShares=1024
+#AllowedCPUs=0-6,56-62
+#AllowedMemoryNodes=0
+Slice=faas.slice
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
