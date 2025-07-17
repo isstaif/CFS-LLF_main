@@ -570,10 +570,10 @@ def rd_hashd_benchmark_args_workload():
         file.close()        
 
         if workload == "none":
-            trace_path_line = f"//\"trace_path\": \"/local/scratch/rd-hashd/{workload}/trace-{i}\",\n"
+            trace_path_line = f"//\"trace_path\": \"./{workload}/trace-{i % 228}\",\n"
         else:
             # copy = file.copy()
-            trace_path_line = f"\"trace_path\": \"/local/scratch/rd-hashd/{workload}/trace-{i}\",\n"
+            trace_path_line = f"\"trace_path\": \"./{workload}/trace-{i % 228}\",\n"
 
     #     print(trace_path_line)
         lines[10] = trace_path_line
