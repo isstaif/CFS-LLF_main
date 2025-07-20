@@ -15,7 +15,7 @@ echo "-----"
 # # echo "#sched_entity_before_policy == 4 entity_before_relaxed_fairness(a,b)"
 # # echo "#sched_entity_before_policy == 40  entity_before_unfair(a,b) //this destroys performance" 
 # # echo "#sched_entity_before_policy == 20  entity_before_se_load_avg_most(a,b) //this destroys performance"
-sudo sysctl kernel.sched_entity_before_policy=100
+sudo sysctl kernel.sched_entity_before_policy=1
 sudo sysctl kernel.sched_check_preempt_wakeup_latency_awareness=100
 sudo sysctl kernel.sched_cpu_has_higher_load_task=100
 echo "-----"
@@ -29,30 +29,28 @@ sudo sysctl kernel.sched_tg_load_avg_ema_window=$1
 echo "-----"
 
 echo "setting default shares"
-echo "/sys/fs/cgroup/cpu/kubepods.slice/kubepods-burstable.slice/*/cpu.idle"
-echo '0' | sudo tee -a /sys/fs/cgroup/cpu/kubepods.slice/kubepods-burstable.slice/*/cpu.idle
+#echo "/sys/fs/cgroup/cpu/kubepods.slice/kubepods-burstable.slice/*/cpu.idle"
+#echo '0' | sudo tee -a /sys/fs/cgroup/cpu/kubepods.slice/kubepods-burstable.slice/*/cpu.idle
 echo "/sys/fs/cgroup/cpu/*/cpu.shares"
 echo "/sys/fs/cgroup/cpu/*/*/cpu.shares"
 echo "/sys/fs/cgroup/cpu/*/*/*/cpu.shares"
 echo "/sys/fs/cgroup/cpu/*/*/*/*/cpu.shares"
-echo "/sys/fs/cgroup/cpu/*/*/*/*/cpu.shares"
-echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/cpu.shares
-echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/cpu.shares
-echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/cpu.shares
-echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/*/cpu.shares
+echo '1024' | sudo tee -a /sys/fs/cgroup/*/cpu.weight
+echo '1024' | sudo tee -a /sys/fs/cgroup/*/*/cpu.weight
+#echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/cpu.shares
+#echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/*/cpu.shares
 echo "--------"
 
 echo "resetting latency awawreness flags"
-echo "/sys/fs/cgroup/cpu/cpu.latency_awareness"
 echo "/sys/fs/cgroup/cpu/*/cpu.latency_awareness"
 echo "/sys/fs/cgroup/cpu/*/*/cpu.latency_awareness"
-echo "/sys/fs/cgroup/cpu/*/*/*/cpu.latency_awareness"
-echo "/sys/fs/cgroup/cpu/*/*/*/*/cpu.latency_awareness"
-#echo '0' | sudo tee -a /sys/fs/cgroup/cpu/cpu.latency_awareness
+#echo "/sys/fs/cgroup/cpu/*/*/*/cpu.latency_awareness"
+#echo "/sys/fs/cgroup/cpu/*/*/*/*/cpu.latency_awareness"
+echo '0' | sudo tee -a /sys/fs/cgroup/cpu.latency_awareness
 echo '0' | sudo tee -a /sys/fs/cgroup/*/cpu.latency_awareness
 echo '0' | sudo tee -a /sys/fs/cgroup/*/*/cpu.latency_awareness
-echo '0' | sudo tee -a /sys/fs/cgroup/*/*/*/cpu.latency_awareness
-echo '0' | sudo tee -a /sys/fs/cgroup/*/*/*/*/cpu.latency_awareness
+#echo '0' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/cpu.latency_awareness
+#echo '0' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/*/cpu.latency_awareness
 echo "-----"
 
 # echo "setting latency awawreness flags"
