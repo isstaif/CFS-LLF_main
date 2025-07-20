@@ -15,7 +15,7 @@ echo "-----"
 # # echo "#sched_entity_before_policy == 4 entity_before_relaxed_fairness(a,b)"
 # # echo "#sched_entity_before_policy == 40  entity_before_unfair(a,b) //this destroys performance" 
 # # echo "#sched_entity_before_policy == 20  entity_before_se_load_avg_most(a,b) //this destroys performance"
-sudo sysctl kernel.sched_entity_before_policy=100
+sudo sysctl kernel.sched_entity_before_policy=1
 sudo sysctl kernel.sched_check_preempt_wakeup_latency_awareness=100
 sudo sysctl kernel.sched_cpu_has_higher_load_task=100
 echo "-----"
