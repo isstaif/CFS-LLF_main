@@ -34,21 +34,20 @@ sudo sysctl kernel.sched_tg_load_avg_ema_window=1000
 echo "-----"
 
 echo "setting default shares"
-echo "/sys/fs/cgroup/cpu/kubepods.slice/kubepods-burstable.slice/*/cpu.idle"
-echo '0' | sudo tee -a /sys/fs/cgroup/cpu/kubepods.slice/kubepods-burstable.slice/*/cpu.idle
+#echo "/sys/fs/cgroup/cpu/kubepods.slice/kubepods-burstable.slice/*/cpu.idle"
+#echo '0' | sudo tee -a /sys/fs/cgroup/cpu/kubepods.slice/kubepods-burstable.slice/*/cpu.idle
 echo "/sys/fs/cgroup/cpu/*/cpu.shares"
 echo "/sys/fs/cgroup/cpu/*/*/cpu.shares"
-echo "/sys/fs/cgroup/cpu/*/*/*/cpu.shares"
-echo "/sys/fs/cgroup/cpu/*/*/*/*/cpu.shares"
-echo "/sys/fs/cgroup/cpu/*/*/*/*/cpu.shares"
+#echo "/sys/fs/cgroup/cpu/*/*/*/cpu.shares"
+#echo "/sys/fs/cgroup/cpu/*/*/*/*/cpu.shares"
 echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/cpu.shares
 echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/cpu.shares
-echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/cpu.shares
-echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/*/cpu.shares
+#echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/cpu.shares
+#echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/*/cpu.shares
 echo "--------"
 
 echo "resetting latency awawreness flags"
-echo "/sys/fs/cgroup/cpu/cpu.latency_awareness"
+#echo "/sys/fs/cgroup/cpu/cpu.latency_awareness"
 echo "/sys/fs/cgroup/cpu/*/cpu.latency_awareness"
 echo "/sys/fs/cgroup/cpu/*/*/cpu.latency_awareness"
 echo "/sys/fs/cgroup/cpu/*/*/*/cpu.latency_awareness"
@@ -57,7 +56,7 @@ echo "/sys/fs/cgroup/cpu/*/*/*/*/cpu.latency_awareness"
 echo '0' | sudo tee -a /sys/fs/cgroup/*/cpu.latency_awareness
 echo '0' | sudo tee -a /sys/fs/cgroup/*/*/cpu.latency_awareness
 echo '0' | sudo tee -a /sys/fs/cgroup/*/*/*/cpu.latency_awareness
-echo '0' | sudo tee -a /sys/fs/cgroup/*/*/*/*/cpu.latency_awareness
+#echo '0' | sudo tee -a /sys/fs/cgroup/*/*/*/*/cpu.latency_awareness
 
 
 # sudo sysctl kernel.sched_cfs_rq_is_idle_if_no_latency_awareness=1

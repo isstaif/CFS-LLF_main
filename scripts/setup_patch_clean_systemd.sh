@@ -35,24 +35,22 @@ echo "/sys/fs/cgroup/cpu/*/cpu.shares"
 echo "/sys/fs/cgroup/cpu/*/*/cpu.shares"
 echo "/sys/fs/cgroup/cpu/*/*/*/cpu.shares"
 echo "/sys/fs/cgroup/cpu/*/*/*/*/cpu.shares"
-echo "/sys/fs/cgroup/cpu/*/*/*/*/cpu.shares"
 echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/cpu.shares
 echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/cpu.shares
-echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/cpu.shares
-echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/*/cpu.shares
+#echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/cpu.shares
+#echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/*/cpu.shares
 echo "--------"
 
 echo "resetting latency awawreness flags"
-echo "/sys/fs/cgroup/cpu/cpu.latency_awareness"
 echo "/sys/fs/cgroup/cpu/*/cpu.latency_awareness"
 echo "/sys/fs/cgroup/cpu/*/*/cpu.latency_awareness"
-echo "/sys/fs/cgroup/cpu/*/*/*/cpu.latency_awareness"
-echo "/sys/fs/cgroup/cpu/*/*/*/*/cpu.latency_awareness"
+#echo "/sys/fs/cgroup/cpu/*/*/*/cpu.latency_awareness"
+#echo "/sys/fs/cgroup/cpu/*/*/*/*/cpu.latency_awareness"
 echo '0' | sudo tee -a /sys/fs/cgroup/cpu/cpu.latency_awareness
 echo '0' | sudo tee -a /sys/fs/cgroup/cpu/*/cpu.latency_awareness
 echo '0' | sudo tee -a /sys/fs/cgroup/cpu/*/*/cpu.latency_awareness
-echo '0' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/cpu.latency_awareness
-echo '0' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/*/cpu.latency_awareness
+#echo '0' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/cpu.latency_awareness
+#echo '0' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/*/cpu.latency_awareness
 echo "-----"
 
 # echo "setting latency awawreness flags"
