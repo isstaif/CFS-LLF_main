@@ -26,6 +26,31 @@ Clone the repository along with its submodules:
 git clone --recurse-submodules git@github.com:isstaif/CFS-LLF_main.git
 ```
 
+**Install Dependencies**
+
+Update package lists and install the required development tools and libraries:
+
+```diff
+sudo apt update
+sudo apt install -y git build-essential libncurses5-dev bison flex libssl-dev libelf-dev gcc make git 
+```
+
+**Compile the Kernel**
+
+Navigate to the kernel source directory and begin the build process:
+
+```diff
+cd linux
+cp /boot/config-$(uname -r) .config
+sudo make olddefconfig
+sudo make -j$(nproc) 2> make_stderr.txt
+sudo make modules_install 2> make_stderr.txt
+sudo make install
+sudo update-initramfs -c -k 5.18.0+
+sudo update-grub 
+sudo reboot
+```
+
 ## Quick Start
 
 Follow these steps to install and run the benchmark setup:
