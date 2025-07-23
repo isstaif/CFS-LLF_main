@@ -113,7 +113,7 @@ sudo systemctl status backend
 sudo systemctl status jupyter
 ```
 
-After confirming that Jupyter is running, you can access it via your browser at localhost:8888 by setting up an SSH tunnel:
+After confirming that Jupyter is running, you can access it via your browser at localhost:8888/tree?token=33cb239ebab2736a6487a557fb1c472661838debdd552767 by setting up an SSH tunnel:
 ```bash
 ssh -N -L 8888:localhost:8888 aati2@helios.cl.cam.ac.uk &
 ```
