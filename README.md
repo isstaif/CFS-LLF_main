@@ -92,11 +92,29 @@ sudo pip3 install flask jupyter pandas numpy matplotli
 
 **4. Remote Setup** 
 
-You may now set up the environment remotely via SSH and tmux:
+You can set up the experiment scripts remotely using ssh and tmux:
 
 ```bash
 ssh aati2@helios.cl.cam.ac.uk "tmux new-session -d -c /home/aati2/CFS-LLF_main/ 'sudo python3 scripts/backend.py --ip_address 127.0.0.1'"
 ssh aati2@helios.cl.cam.ac.uk "tmux new-session -d -c /home/aati2/CFS-LLF_main/notebooks/ 'jupyter notebook'"
+```
+
+Alternatively, run as systemd services:
+```bash
+sudo cp scripts/*.service /etc/systemd/system
+sudo systemctl daemon-reload
+sudo systemctl start backend
+sudo systemctl start jupyter
+```
+
+Check that the services are running:
+```bash
+sudo systemctl status backend
+sudo systemctl status jupyter
+```
+
+After confirming that Jupyter is running, you can access it via your browser at localhost:8888 by setting up an SSH tunnel:
+```bash
 ssh -N -L 8888:localhost:8888 aati2@helios.cl.cam.ac.uk &
 ```
 
