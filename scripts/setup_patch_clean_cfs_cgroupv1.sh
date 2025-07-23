@@ -40,8 +40,8 @@ echo "/sys/fs/cgroup/cpu/*/cpu.shares"
 echo "/sys/fs/cgroup/cpu/*/*/cpu.shares"
 #echo "/sys/fs/cgroup/cpu/*/*/*/cpu.shares"
 #echo "/sys/fs/cgroup/cpu/*/*/*/*/cpu.shares"
-echo '1024' | sudo tee -a /sys/fs/cgroup/*/cpu.weight
-echo '1024' | sudo tee -a /sys/fs/cgroup/*/*/cpu.weight
+echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/cpu.shares
+echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/cpu.shares
 #echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/cpu.shares
 #echo '1024' | sudo tee -a /sys/fs/cgroup/cpu/*/*/*/*/cpu.shares
 echo "--------"
