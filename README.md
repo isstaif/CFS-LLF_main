@@ -30,19 +30,26 @@ git clone --recurse-submodules git@github.com:isstaif/CFS-LLF_main.git
 
 Update package lists and install the required development tools and libraries:
 
-```diff
+```bash
 sudo apt update
 sudo apt install -y git build-essential libncurses5-dev bison flex libssl-dev libelf-dev gcc make git 
 ```
 
 **Compile the Kernel**
 
-Navigate to the kernel source directory and begin the build process:
+Navigate to the kernel source directory and prepare kernel configurations based on the currently running kernel. You may  need to disable Ubuntu certificate related configuration before building the kernel:
 
-```diff
+```bash
 cd linux
 cp /boot/config-$(uname -r) .config
+sudo ./scripts/config --disable CONFIG_MODULE_SIG_KEY
+sudo ./scripts/config --disable CONFIG_SYSTEM_TRUSTED_KEYS
+sudo ./scripts/config --disable CONFIG_SYSTEM_REVOCATION_KEYS
 sudo make olddefconfig
+```
+
+Begin the build process:
+```bash
 sudo make -j$(nproc) 2> make_stderr.txt
 sudo make modules_install 2> make_stderr.txt
 sudo make install
@@ -93,10 +100,6 @@ ssh aati2@helios.cl.cam.ac.uk "tmux new-session -d -c /home/aati2/CFS-LLF_main/n
 ssh -N -L 8888:localhost:8888 aati2@helios.cl.cam.ac.uk &
 ```
 
-**Notes**
-
-- Ensure you have the necessary permissions to carry out system-level operations and remote access to the `helios.cl.cam.ac.uk` host.
-- Consider using a Python virtual environment to manage dependencies cleanly.
 
 ## Publications
 
