@@ -4,7 +4,7 @@ After=network.target
 StartLimitIntervalSec=0
 
 [Service]
-WorkingDirectory=/home/aati2/CFS-LLF_main
+WorkingDirectory=/local/scratch/CFS-LLF_main
 ExecStart=/usr/local/bin/jupyter notebook --allow-root
 Restart=always
 RestartSec=1
