@@ -87,7 +87,7 @@ Install Python and the required Python packages:
 
 ```bash
 sudo apt-get install python3 python3-pip
-sudo pip3 install flask jupyter pandas numpy matplotli
+sudo pip3 install flask jupyter pandas numpy matplotlib
 ```
 
 **4. Remote Setup** 
