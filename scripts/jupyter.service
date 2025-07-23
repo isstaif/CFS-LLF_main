@@ -1,0 +1,16 @@
+[Unit]
+Description=Description of your script
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+WorkingDirectory=/home/aati2/CFS-LLF_main
+ExecStart=/usr/local/bin/jupyter notebook --allow-root
+Restart=always
+RestartSec=1
+User=root
+Group=root
+Type=simple
+
+[Install]
+WantedBy=multi-user.target

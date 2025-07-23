@@ -161,8 +161,8 @@ def get_snapshot(ksvcs, cgroups):
     print("get_snapshot", len(data), "cgroups")         
     return data  
 
-overload_loop_log = open('/home/aati2/overload_loop_log', 'w',buffering=1)
-writer = csv.writer(overload_loop_log)
+#overload_loop_log = open('/home/aati2/overload_loop_log', 'w',buffering=1)
+#writer = csv.writer(overload_loop_log)
 
 def overload_loop(
     duration=10,

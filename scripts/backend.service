@@ -1,0 +1,16 @@
+[Unit]
+Description=Description of your script
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+WorkingDirectory=/home/aati2/CFS-LLF_main
+ExecStart=/usr/bin/python3 scripts/backend.py --ip_address 127.0.0.1
+Restart=always
+RestartSec=1
+User=root
+Group=root
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
