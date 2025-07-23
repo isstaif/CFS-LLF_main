@@ -26,6 +26,77 @@ Clone the repository along with its submodules:
 git clone --recurse-submodules git@github.com:isstaif/CFS-LLF_main.git
 ```
 
+**Install Dependencies**
+
+Update package lists and install the required development tools and libraries:
+
+```diff
+sudo apt update
+sudo apt install -y git build-essential libncurses5-dev bison flex libssl-dev libelf-dev gcc make git 
+```
+
+**Compile the Kernel**
+
+Navigate to the kernel source directory and begin the build process:
+
+```diff
+cd linux
+cp /boot/config-$(uname -r) .config
+sudo make olddefconfig
+sudo make -j$(nproc) 2> make_stderr.txt
+sudo make modules_install 2> make_stderr.txt
+sudo make install
+sudo update-initramfs -c -k 5.18.0+
+sudo update-grub 
+sudo reboot
+```
+
+## Quick Start
+
+Follow these steps to install and run the benchmark setup:
+
+**1. Install the Service and Binary**
+
+Update the working directory in `rd-hashd/func@.service` as required, then install the systemd service and benchmark binary:
+
+```bash
+sudo cp rd-hashd/func@.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sudo cp rd-hashd/rd-hashd /usr/local/bin/
+```
+
+**2. Run the Benchmark (Initial Setup)**
+
+Run the benchmark manually once to download the hash data for the original `resctl-demo`. This may take a few minutes:
+
+```bash
+cd rd-hashd
+/usr/local/bin/rd-hashd --args args/args-0.json
+```
+
+**3. Install Notebook Dependencies**
+
+Install Python and the required Python packages:
+
+```bash
+sudo apt-get install python3 python3-pip
+sudo pip3 install flask jupyter pandas numpy matplotli
+```
+
+**4. Remote Setup** 
+
+You may now set up the environment remotely via SSH and tmux:
+
+```bash
+ssh aati2@helios.cl.cam.ac.uk "tmux new-session -d -c /home/aati2/CFS-LLF_main/ 'sudo python3 scripts/backend.py --ip_address 127.0.0.1'"
+ssh aati2@helios.cl.cam.ac.uk "tmux new-session -d -c /home/aati2/CFS-LLF_main/notebooks/ 'jupyter notebook'"
+ssh -N -L 8888:localhost:8888 aati2@helios.cl.cam.ac.uk &
+```
+
+**Notes**
+
+- Ensure you have the necessary permissions to carry out system-level operations and remote access to the `helios.cl.cam.ac.uk` host.
+- Consider using a Python virtual environment to manage dependencies cleanly.
 
 ## Publications
 
