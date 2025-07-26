@@ -3,8 +3,8 @@ sudo sysctl kernel.sched_energy_aware=1
 sudo sysctl kernel.sched_schedstats=1
 echo "-----"
 
-echo '24000000' | sudo tee -a /sys/kernel/debug/sched/latency_ns
-echo '3000000' | sudo tee -a /sys/kernel/debug/sched/min_granularity_ns
+echo '1000000000' | sudo tee -a /sys/kernel/debug/sched/latency_ns
+echo '100000000' | sudo tee -a /sys/kernel/debug/sched/min_granularity_ns
 echo '4000000' | sudo tee -a /sys/kernel/debug/sched/wakeup_granularity_ns
 echo '750000' | sudo tee -a /sys/kernel/debug/sched/idle_min_granularity_ns
 

@@ -37,6 +37,29 @@ echo "/sys/fs/cgroup/cpu/*/*/cpu.latency_awareness"
 echo '0' | sudo tee -a /sys/fs/cgroup/*/cpu.latency_awareness
 echo '0' | sudo tee -a /sys/fs/cgroup/*/*/cpu.latency_awareness
 
-systemd-cgls | grep 'rd-hashd' | tail -n +2 | grep -Eo '[[:digit:]]+ ' > /tmp/pids
-while read pid; do sudo chrt -o -a -p 0 $pid; done < /tmp/pids
-while read pid; do sudo chrt -o -p $pid; done < /tmp/pids
+FILE="pids"
+
+# Desired number of lines
+TARGET_LINES=12
+
+# Loop until the file reaches the target number of lines
+while true; do
+    if [ -f "$FILE" ]; then
+        LINE_COUNT=$(wc -l < "$FILE")
+        echo "Current line count: $LINE_COUNT"
+        if [ "$LINE_COUNT" -ge "$TARGET_LINES" ]; then
+            echo "File has reached or exceeded $TARGET_LINES lines!"
+            break
+        fi
+    else
+        echo "File does not exist yet, waiting..."
+    fi
+    sleep 1
+    sudo systemd-cgls | grep 'rd-hashd' | tail -n +2 | grep -Eo '[[:digit:]]+ ' > pids
+done
+echo "File is no longer empty!"
+
+while read pid; do sudo chrt -r -a -p 99 $pid; done < pids
+while read pid; do sudo chrt -o -p $pid; done < pids
+cat pids
+rm pids
