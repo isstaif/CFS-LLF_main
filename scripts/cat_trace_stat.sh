@@ -1,0 +1,12 @@
+sudo cat /sys/kernel/debug/tracing/trace_stat/function0
+sudo cat /sys/kernel/debug/tracing/trace_stat/function1
+sudo cat /sys/kernel/debug/tracing/trace_stat/function2
+sudo cat /sys/kernel/debug/tracing/trace_stat/function3
+sudo cat /sys/kernel/debug/tracing/trace_stat/function4
+sudo cat /sys/kernel/debug/tracing/trace_stat/function5
+sudo cat /sys/kernel/debug/tracing/trace_stat/function6
+sudo cat /sys/kernel/debug/tracing/trace_stat/function7
+sudo cat /sys/kernel/debug/tracing/trace_stat/function8
+sudo cat /sys/kernel/debug/tracing/trace_stat/function9
+sudo cat /sys/kernel/debug/tracing/trace_stat/function10
+sudo cat /sys/kernel/debug/tracing/trace_stat/function11

@@ -541,7 +541,7 @@ def rd_hashd_benchmark_singlecgroup_end():
 def function_profile_enabled():
     enabled = request.args.to_dict()['enabled']
 
-    cmd = "./ftrace_schedule_overhead.sh"
+    cmd = "./scripts/ftrace_schedule_overhead.sh"
     process = subprocess.Popen([cmd], stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()
 
