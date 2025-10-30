@@ -90,6 +90,23 @@ sudo apt-get install python3 python3-pip
 sudo pip3 install flask jupyter pandas numpy matplotlib
 ```
 
+However, using a Python virtual environment is preferable:
+
+```json
+sudo apt update && sudo apt upgrade -y
+sudo apt install python3 python3-pip python3-venv -y
+```
+
+```json
+python3 -m venv jupyter_env
+source jupyter_env/bin/activate
+```
+
+```json
+cd jupyter_env
+pip install jupyter
+```
+
 **4. Remote Setup** 
 
 You can set up the experiment scripts remotely using ssh and tmux:
@@ -117,6 +134,8 @@ After confirming that Jupyter is running, you can access it via your browser at 
 ```bash
 ssh -N -L 8888:localhost:8888 aati2@helios.cl.cam.ac.uk &
 ```
+
+
 
 
 ## Publications

@@ -5,7 +5,7 @@ StartLimitIntervalSec=0
 
 [Service]
 WorkingDirectory=/local/scratch/CFS-LLF_main
-ExecStart=/usr/local/bin/jupyter notebook --allow-root
+ExecStart=/local/scratch/CFS-LLF_main/jupyter_env/bin/jupyter notebook --allow-root
 Restart=always
 RestartSec=1
 User=root
