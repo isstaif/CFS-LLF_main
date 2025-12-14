@@ -92,17 +92,17 @@ sudo pip3 install flask jupyter pandas numpy matplotlib
 
 However, using a Python virtual environment is preferable:
 
-```json
+```bash
 sudo apt update && sudo apt upgrade -y
 sudo apt install python3 python3-pip python3-venv -y
 ```
 
-```json
+```bash
 python3 -m venv jupyter_env
 source jupyter_env/bin/activate
 ```
 
-```json
+```bash
 cd jupyter_env
 pip install jupyter
 ```
