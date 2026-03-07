@@ -104,7 +104,7 @@ source jupyter_env/bin/activate
 
 ```bash
 cd jupyter_env
-pip install jupyter
+pip install jupyter pandas numpy matplotlib
 ```
 
 **4. Remote Setup** 
