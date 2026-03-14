@@ -64,6 +64,10 @@ sudo update-initramfs -c -k 5.18.0+
 sudo update-grub 
 sudo reboot
 ```
+Since the kernel build process is parallel, it may continue even when an error occurs. You can detect such errors by monitoring the error output file separately:
+```bash
+tail -f make_stderr.txt
+```
 
 ## Quick Start
 
