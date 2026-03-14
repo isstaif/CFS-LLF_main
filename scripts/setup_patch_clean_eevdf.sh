@@ -10,7 +10,6 @@ sudo head /sys/kernel/debug/sched/debug -n 16
 sudo sysctl kernel.sched_disable_calc_group_shares=0
 sudo sysctl kernel.sched_disable_vruntime_preemption=0
 sudo sysctl kernel.sched_disable_entity_eligible=0
-# sudo sysctl kernel.sched_slice_static_period=0
 echo "-----"
 
 sudo sysctl kernel.sched_entity_before_policy=0
@@ -30,8 +29,8 @@ echo '1024' | sudo tee -a /sys/fs/cgroup/*/*/cpu.weight
 echo "--------"
 
 echo "resetting latency awawreness flags"
-echo "/sys/fs/cgroup/cpu/*/cpu.latency_awareness"
-echo "/sys/fs/cgroup/cpu/*/*/cpu.latency_awareness"
+echo "/sys/fs/cgroup/*/cpu.latency_awareness"
+echo "/sys/fs/cgroup/*/*/cpu.latency_awareness"
 echo '0' | sudo tee -a /sys/fs/cgroup/*/cpu.latency_awareness
 echo '0' | sudo tee -a /sys/fs/cgroup/*/*/cpu.latency_awareness
 
