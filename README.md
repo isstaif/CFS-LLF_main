@@ -32,19 +32,21 @@ Update package lists and install the required development tools and libraries:
 
 ```bash
 sudo apt update
-sudo apt install -y git build-essential libncurses5-dev bison flex libssl-dev libelf-dev gcc make git 
+sudo apt install -y git build-essential libncurses5-dev bison flex libssl-dev libelf-dev gcc make git gawk
 ```
 
 **Compile the Kernel**
 
-Unless this is your first time building the kernel, make sure you start from a clean build directory.
+Navigate to the kernel source directory and prepare kernel configurations based on the currently running kernel. Unless this is your first time building the kernel, make sure you start from a clean build directory.
+
 ```bash
+cd linux
+git checkout CFS-LLF
 sudo make mrproper
 sudo make clean
 ```
 
-Navigate to the kernel source directory and prepare kernel configurations based on the currently running kernel. You may  need to disable Ubuntu certificate related configuration before building the kernel:
-
+You are now ready to configure and build the kernel with CFS-LLF. You may need to disable Ubuntu certificate-related configuration before building the kernel.
 ```bash
 cd linux
 cp /boot/config-$(uname -r) .config
