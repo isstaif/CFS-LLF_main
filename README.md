@@ -37,6 +37,12 @@ sudo apt install -y git build-essential libncurses5-dev bison flex libssl-dev li
 
 **Compile the Kernel**
 
+Unless this is your first time building the kernel, make sure you start from a clean build directory.
+```bash
+sudo make mrproper
+sudo make clean
+```
+
 Navigate to the kernel source directory and prepare kernel configurations based on the currently running kernel. You may  need to disable Ubuntu certificate related configuration before building the kernel:
 
 ```bash
