@@ -9,6 +9,7 @@ sudo head /sys/kernel/debug/sched/debug -n 16
 
 sudo sysctl kernel.sched_disable_calc_group_shares=0
 sudo sysctl kernel.sched_disable_vruntime_preemption=0
+sudo sysctl kernel.sched_disable_entity_eligible=0
 # sudo sysctl kernel.sched_slice_static_period=0
 echo "-----"
 
