@@ -48,7 +48,6 @@ sudo make clean
 
 You are now ready to configure and build the kernel with CFS-LLF. You may need to disable Ubuntu certificate-related configuration before building the kernel.
 ```bash
-cd linux
 cp /boot/config-$(uname -r) .config
 sudo ./scripts/config --disable CONFIG_MODULE_SIG_KEY
 sudo ./scripts/config --disable CONFIG_SYSTEM_TRUSTED_KEYS
