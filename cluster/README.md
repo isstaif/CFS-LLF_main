@@ -1,10 +1,26 @@
-Locust script
+Locust script  on the workload generator server (not part of the cluster):
 
 ```bash
 locust --host http://10.97.232.9 --headless --users 100 --spawn-rate 10  --run-time 10m
 ```
 
-Kubernetes cluster
+```
+curl  -v -H "Host: pytorch-classifier-1.default.example.com" -i -X POST "http://10.97.232.9/predict" -F image=@/local/scratch/jackson-1-part2-profiles/jackson-1-part2-5h50m/720p/002825.jpg
+```
+
+Knative service (control plane):
+
+```
+kubectl --namespace kourier-system get service kourier
+NAME      TYPE           CLUSTER-IP    EXTERNAL-IP   PORT(S)                      AGE
+kourier   LoadBalancer   10.97.232.9   <pending>     80:30712/TCP,443:31085/TCP   161d
+```
+
+```
+curl -v  -H "Host: pytorch-classifier-1.default.example.com" -i -X POST "http://10.97.232.9/predict" -F image=@/home/aati2/Sunflower_from_Silesia2.jpg
+```
+
+Kubernetes cluster:
 
 List of nodes:
 
