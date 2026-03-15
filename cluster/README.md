@@ -1,12 +1,27 @@
+
+## Workload generation and data collection
 Locust script  on the workload generator server (not part of the cluster):
 
 ```bash
-locust --host http://10.97.232.9 --headless --users 100 --spawn-rate 10  --run-time 10m
+locust --host http://10.97.232.9 --headless --users 100 --spawn-rate 10  --run-time 3m --html=locust-report-cfs.html --csv=locust-results-cfs
+locust --host http://10.97.232.9 --headless --users 100 --spawn-rate 10  --run-time 3m --html=locust-report-cfsllf.html --csv=locust-results-cfsllf
+```
+
+On the worker machine:
+```
+sar -u 10 18 > locust-cpu-cfs
+sar -u 10 18 > locust-cpu-cfsllf
 ```
 
 ```
 curl  -v -H "Host: pytorch-classifier-1.default.example.com" -i -X POST "http://10.97.232.9/predict" -F image=@/local/scratch/jackson-1-part2-profiles/jackson-1-part2-5h50m/720p/002825.jpg
 ```
+
+You can view reports here:
+- [CFS-LLF](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfsllf.html)
+- [CFS](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfs.html)
+
+## Cluster and control plane setup
 
 Knative service (control plane):
 
