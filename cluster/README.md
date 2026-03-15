@@ -5,6 +5,9 @@ locust --host http://10.97.232.9 --headless --users 100 --spawn-rate 10  --run-t
 ```
 
 Kubernetes cluster
+
+List of nodes:
+
 ```bash
 NAME                      STATUS                     ROLES           AGE    VERSION
 caelum-405                Ready,SchedulingDisabled   <none>          161d   v1.34.1
@@ -13,6 +16,7 @@ caelum-407                Ready,SchedulingDisabled   control-plane   161d   v1.3
 caelum-408.cl.cam.ac.uk   Ready                      <none>          137d   v1.34.1
 ```
 
+List of pods:
 
 ```bash
 NAMESPACE         NAME                                                      READY   STATUS    RESTARTS       AGE    IP              NODE                      NOMINATED NODE   READINESS GATES
