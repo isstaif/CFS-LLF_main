@@ -1,4 +1,16 @@
 
+
+CFS-LLF increases throughput by 26% and 12% compared to CFS and EEVDF respectively. 
+
+| Scheduler | Report                                                                                                                            | Latency (ms) | RPS  | Total Requests |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---- | -------------- |
+| CFS-LLF   | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfsllf.html) | 54–210       | 47.5 | 8550           |
+| CFS       | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfs.html)    | 590–1800     | 37.6 | 6770           |
+| EEVDF     | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-eevdf.html)  | 280–1100     | 42.3 | 7609           |
+
+![til](./cluster-demo.gif)
+
+
 ## Workload generation and data collection
 Locust script  on the workload generator server (not part of the cluster):
 
@@ -16,13 +28,6 @@ sar -u 10 18 > locust-cpu-cfsllf
 ```
 curl  -v -H "Host: pytorch-classifier-1.default.example.com" -i -X POST "http://10.97.232.9/predict" -F image=@/local/scratch/jackson-1-part2-profiles/jackson-1-part2-5h50m/720p/002825.jpg
 ```
-
-| Scheduler | Report                                                                                                                            | Latency (ms) | RPS  |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---- |
-| CFS-LLF   | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfsllf.html) | 54–210       | 47.5 |
-| CFS       | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfs.html)    | 590–1800     | 37.6 |
-| EEVDF     | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-eevdf.html)  | 280–1100     | 42.3 |
-
 
 ## Cluster and control plane setup
 
