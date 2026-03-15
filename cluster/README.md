@@ -17,9 +17,12 @@ sar -u 10 18 > locust-cpu-cfsllf
 curl  -v -H "Host: pytorch-classifier-1.default.example.com" -i -X POST "http://10.97.232.9/predict" -F image=@/local/scratch/jackson-1-part2-profiles/jackson-1-part2-5h50m/720p/002825.jpg
 ```
 
-You can view reports here:
-- [CFS-LLF](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfsllf.html)
-- [CFS](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfs.html)
+| Scheduler | Report                                                                                                                            | Latency (ms) | RPS  |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---- |
+| CFS-LLF   | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfsllf.html) | 54–210       | 47.5 |
+| CFS       | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfs.html)    | 590–1800     | 37.6 |
+| EEVDF     | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-eevdf.html)  | 280–1100     | 42.3 |
+
 
 ## Cluster and control plane setup
 
