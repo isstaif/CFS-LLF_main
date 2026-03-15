@@ -1,0 +1,45 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: pytorch-classifier-1
+#  namespace: bentoml
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/maxScale: "1"
+        autoscaling.knative.dev/class: kpa.autoscaling.knative.dev
+        autoscaling.knative.dev/target-burst-capacity: "0"
+        #        autoscaling.knative.dev/metric: "rps"
+        #        autoscaling.knative.dev/metric: "rps"
+        #        autoscaling.knative.dev/target: "10"
+        autoscaling.knative.dev/window: "6s"
+        #        autoscaling.knative.dev/scale-down-delay: "300s"
+        enable-scale-to-zero: "false"
+        #        queue.sidecar.serving.knative.dev/resourcePercentage: "20"
+        #        io.cilium.proxy-visibility: "<Ingress/8012/TCP/HTTP>,<Ingress/8022/TCP/HTTP>"
+    spec:
+      #containerConcurrency: 100
+      #      timeoutSeconds: 10
+      containers:
+        - image: docker.io/isstaif/pytorch-image-classifier
+          resources:
+            requests:
+#              cpu: 210m
+              cpu: 30m
+              memory: 512M
+          ports:
+            - containerPort: 5000
+              #          livenessProbe:
+              #            httpGet:
+              #              path: /healthz
+              #            initialDelaySeconds: 3
+              #            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /healthz
+            initialDelaySeconds: 3
+            periodSeconds: 5
+            failureThreshold: 3
+            timeoutSeconds: 60
