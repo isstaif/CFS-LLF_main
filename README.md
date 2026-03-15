@@ -73,6 +73,13 @@ Since the kernel build process is parallel, it may continue even when an error o
 tail -f make_stderr.txt
 ```
 
+This process can be repeated for each of the following kernel branches:
+- CFS-LLF (based on v5.18)
+- v5.18 (baseline for CFS-LLF)
+- CFS-LLF-ported (based on v6.12)
+- v.6.12 (baseline for CFS-LLF-ported)
+
+
 ## Quick Start
 
 Follow these steps to install and run the benchmark setup:
