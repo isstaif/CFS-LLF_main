@@ -24,15 +24,23 @@ echo "-----"
 echo "setting default shares"
 echo "/sys/fs/cgroup/*/cpu.weight"
 echo "/sys/fs/cgroup/*/*/cpu.weight"
+echo "/sys/fs/cgroup/*/*/*/cpu.weight"
+echo "/sys/fs/cgroup/*/*/*/*/cpu.weight"
 echo '1024' | sudo tee -a /sys/fs/cgroup/*/cpu.weight
 echo '1024' | sudo tee -a /sys/fs/cgroup/*/*/cpu.weight
+echo '1024' | sudo tee -a /sys/fs/cgroup/*/*/*/cpu.weight
+echo '1024' | sudo tee -a /sys/fs/cgroup/*/*/*/*/cpu.weight
 echo "--------"
 
 echo "resetting latency awawreness flags"
 echo "/sys/fs/cgroup/*/cpu.latency_awareness"
 echo "/sys/fs/cgroup/*/*/cpu.latency_awareness"
+echo "/sys/fs/cgroup/*/*/*/cpu.latency_awareness"
+echo "/sys/fs/cgroup/*/*/*/*/cpu.latency_awareness"
 echo '0' | sudo tee -a /sys/fs/cgroup/*/cpu.latency_awareness
 echo '0' | sudo tee -a /sys/fs/cgroup/*/*/cpu.latency_awareness
+echo '0' | sudo tee -a /sys/fs/cgroup/*/*/*/cpu.latency_awareness
+echo '0' | sudo tee -a /sys/fs/cgroup/*/*/*/*/cpu.latency_awareness
 
 systemd-cgls | grep 'rd-hashd' | tail -n +2 | grep -Eo '[[:digit:]]+ ' > /tmp/pids
 while read pid; do sudo chrt -o -a -p 0 $pid; done < /tmp/pids
