@@ -6,7 +6,7 @@ The figure below illustrates the **cgroups** on a Kubernetes worker node when ru
 
 ![Knative cgroups](./knative-cgroups.png)
 
-The next figure shows the internal data structures initialised within the group scheduler for the 100 kept-alive functions. The **LLF extension** manages scheduling within the common cgroup shared by all competing Kubernetes pods (i.e. `k8s-burstable`, green circle). Target cgroups can be explicitly configured from user space using the `cpu.latency_awareness` cgroup property (i.e. `kubepod{1-100}`, blue circle). For further details, please refer to the [tutorial](./tutorial.md).
+The next figure shows the internal data structures initialised within the group scheduler for the 100 kept-alive functions. The **LLF extension** manages scheduling within the common cgroup shared by all competing Kubernetes pods (i.e. `k8s-burstable`, green circle). Target cgroups can be explicitly configured from user space using the `cpu.latency_awareness` cgroup property (i.e. `kubepod{1-100}`, blue circles). For further details, please refer to the [tutorial](./tutorial.md).
 
 ![Knative cgroups](./cfs-fair-share-complex-illustrated.png)
 
