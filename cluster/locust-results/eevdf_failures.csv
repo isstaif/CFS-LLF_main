@@ -1,0 +1,2 @@
+Method,Name,Error,Occurrences
+POST,/predict,502 Server Error: Bad Gateway for url: http://10.97.232.9/predict,5
