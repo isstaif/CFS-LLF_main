@@ -1,14 +1,26 @@
+## Cluster experiments overview
 
+## Results
 
-CFS-LLF increases throughput by 26% and 12% compared to CFS and EEVDF respectively. 
+LLF increases throughput by 26% and 12% compared to CFS and EEVDF respectively. This improvement does not come at the expense of latency. Instead, latency decreases by around 6× for both median and tail metrics.
+
 
 | Scheduler | Report                                                                                                                            | Latency (ms) | RPS  | Total Requests |
 | --------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---- | -------------- |
 | CFS-LLF   | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfsllf.html) | 54–210       | 47.5 | 8550           |
 | CFS       | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfs.html)    | 590–1800     | 37.6 | 6770           |
+
+| Scheduler | Report                                                                                                                            | Latency (ms) | RPS  | Total Requests |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---- | -------------- |
+| EEVDF-LLF   | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfsllf.html) | 54–210       | 47.5 | 8550           |
 | EEVDF     | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-eevdf.html)  | 280–1100     | 42.3 | 7609           |
 
-![til](./cluster-demo.gif)
+
+The joint improvement in throughput and latency can be attributed not to a typical throughput–latency trade-off, but to the mitigation of CPU overhead. A detailed root-cause analysis is presented in Section §3.1 of our [paper](https://arxiv.org/abs/2508.15703), based on the `resctl` open-loop benchmark and `ftrace` kernel instrumentation. 
+
+The demo below illustrates the CPU overhead problem, where a significant portion of CPU time is spent within the kernel scheduler itself (i.e., the schedule() function), causing the CPU to appear fully utilized. Under LLF, after mitigating this overhead, the average effective CPU utilization is reduced to around 40%.
+
+![til](./cluster/cluster-demo.gif)
 
 
 ## Workload generation and data collection
@@ -19,10 +31,35 @@ locust --host http://10.97.232.9 --headless --users 100 --spawn-rate 10  --run-t
 locust --host http://10.97.232.9 --headless --users 100 --spawn-rate 10  --run-time 3m --html=locust-report-cfsllf.html --csv=locust-results-cfsllf
 ```
 
-On the worker machine:
+```bash
+locust --host http://10.97.232.9 --headless --users 100 --spawn-rate 10  --run-time 3m --html=locust-results/eevdf.html --csv=locust-results/eevdf
+locust --host http://10.97.232.9 --headless --users 100 --spawn-rate 10  --run-time 3m --html=locust-results/eevdfllf.html --csv=locust-results/eevdfllf
 ```
+
+On the worker machine:
+
+CFS
+```
+./scripts/setup_patch_clean_cfs.sh
 sar -u 10 18 > locust-cpu-cfs
+```
+
+CFS-LLF
+```
+./scripts/setup_patch_clean_k8s.sh 1000
 sar -u 10 18 > locust-cpu-cfsllf
+```
+
+EEVDF
+```
+./scripts/setup_patch_clean_eevdf.sh
+sar -u 10 18 > locust-cpu-eevdf
+```
+
+EEVDF-LLF
+```
+./scripts/setup_patch_clean_k8s.sh 1000
+sar -u 10 18 > locust-cpu-eevdfllf
 ```
 
 ```
