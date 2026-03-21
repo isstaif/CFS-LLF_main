@@ -20,7 +20,7 @@ The joint improvement in throughput and latency can be attributed not to a typic
 
 The demo below illustrates the CPU overhead problem, where a significant portion of CPU time is spent within the kernel scheduler itself (i.e., the schedule() function), causing the CPU to appear fully utilized. Under LLF, after mitigating this overhead, the average effective CPU utilization is reduced to around 40%.
 
-![til](./cluster/cluster-demo.gif)
+![til](./cluster-demo.gif)
 
 
 ## Workload generation and data collection
