@@ -20,11 +20,9 @@ The joint improvement in throughput and latency can be attributed not to a typic
 
 Another counter-intuitive observation is that this improvement causes a reduction in CPU utilisation. This reduction can be again explained by mitigated CPU overhead where a significant portion of CPU time is spent within the kernel scheduler itself (i.e., the schedule() function), causing the CPU to appear fully utilised (75-90% under EEVDF/CFS). Under LLF the CPU utilisation is much lower around 40-50% which is much closer to the effective CPU utilisation.
 
-The demo below illustrates the CPU overhead issue, showing in real time how CPU utilisation is significantly reduced once the LLF scheduler is activated.
 
-![til](./cluster-demo.gif)
 
-## CFS comparison
+CFS comparison:
 
 | Scheduler | Locust Report                                                                                                                        | Median Latency (ms) | Tail Latency (ms) | RPS  | Total requests | SAR Report | CPU Utilisation (%) |
 | --------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ----------------- | ---- | -------------- | ---------------- | ------------------- |
@@ -32,14 +30,16 @@ The demo below illustrates the CPU overhead issue, showing in real time how CPU 
 | CFS       | [Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-results/report-cfs.html)    | 590                 | 1400              | 37.6 | 6770           | [Report](./locust-results/locust-cpu-cfs)                | ~90%                |
 
 
-## EEVDF comparison
+EEVDF comparison:
 
 | Scheduler | Locust Report                                                                                                                        | Median Latency (ms) | Tail Latency (ms) | RPS  | Total requests | SAR Report | CPU Utilisation (%) |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------- | ----------------- | ---- | -------------- | ---------------- | ------------------- |
 | EEVDF-LLF | [Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-results/report-eevdfllf.html) | 60                  | 420               | 46.4 | 8355           | [Report](./locust-results/locust-cpu-eevdfllf)                |  ~50%               |
 | EEVDF     | [Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-results/report-eevdf.html)    | 240                 | 750               | 42.8 | 7705           | [Report](./locust-results/locust-cpu-eevdf)                | ~75%                |
 
+The demo below illustrates the CPU overhead issue, showing in real time how CPU utilisation is significantly reduced once the LLF scheduler is activated.
 
+![til](./cluster-demo.gif)
 
 ## Workload generation and data collection
 Locust script  on the workload generator server (not part of the cluster):
