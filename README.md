@@ -9,7 +9,25 @@ CPU resource units, such as [Kubernetes’ millicores](https://kubernetes.io/doc
 
 CFS-LLF extends CFS to mitigate the CPU contention that arises when a large number of containers are co-located in a Linux cluster. The design of LLF is inspired by the Shortest Remaining Time First (SRTF) policy but differs by prioritising containers with the lightest load over a reference period, which corresponds to one millicore (i.e., 1 second). CFS-LLF employs a load credit mechanism to prioritise corresponding cgroups based on their recent load, favouring those with lower load credit consumption. This mechanism approximates the LLF policy by scheduling cgroups according to the CPU time they have already received, assuming this reflects their remaining demand. This approach is particularly effective for serverless workloads, which are typically short-lived and have minimal concurrent invocations.
 
-## Demo
+## Resources
+
+* [**Mitigating Context Switching in Densely Packed Linux Clusters with Latency-Aware Group Scheduling** *(arXiv)*](https://arxiv.org/abs/2508.15703)
+  The preprint introducing the CFS‑LLF scheduler extension, including the motivating case study and evaluation for serverless function scheduling.
+
+* [**Technical Report**](https://www.cl.cam.ac.uk/techreports/UCAM-CL-TR-1004.html)
+  Full technical report from the University of Cambridge Computer Laboratory based on Amjad's PhD, presenting the complete theoretical and technical details underlying CFS‑LLF.
+
+* [**FOSDEM 2026: Unlocking Extra Cluster Capacity with Enhanced Linux cgroup Scheduling**](https://fosdem.org/2026/schedule/event/F33P7S-unlocking_extra_cluster_capacity_with_enhanced_linux_cgroup_scheduling/)
+  A conference talk at FOSDEM 2026 providing a high-level overview of CFS‑LLF and its impact on cluster performance.
+
+* [**Kubernetes Could Use a Different Linux Scheduler** *(CloudNativeNow)*](https://cloudnativenow.com/features/kubernetes-could-use-a-different-linux-scheduler/)
+  An article highlighting the FOSDEM 2026 talk and the limitations of the standard Linux scheduler for Kubernetes workloads.
+  
+## Demo 
+
+The LLF scheduler increases throughput by 26% over CFS and 12% over EEVDF while reducing latency by around sixfold for both median and tail metrics. This improvement is achieved by mitigating CPU overhead in the kernel scheduler, which lowers CPU utilisation from 75–90% under CFS and EEVDF to 40–50% under LLF, more accurately reflecting actual CPU usage. A demonstration further illustrates this effect, showing in real time how CPU utilisation drops significantly when the LLF scheduler is activated.
+
+Further details can be found [here](./cluster/README.md).
 
 ![til](./cluster/cluster-demo.gif)
 
