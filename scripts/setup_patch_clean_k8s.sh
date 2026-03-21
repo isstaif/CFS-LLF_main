@@ -1,6 +1,7 @@
 
 sudo sysctl kernel.sched_disable_calc_group_shares=1
 sudo sysctl kernel.sched_disable_vruntime_preemption=1
+sudo sysctl kernel.sched_disable_entity_eligible=1
 echo "-----"
 
 sudo sysctl kernel.sched_entity_before_policy=1
