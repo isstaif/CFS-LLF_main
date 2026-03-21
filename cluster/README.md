@@ -4,19 +4,22 @@
 
 LLF increases throughput by 26% and 12% compared to CFS and EEVDF respectively. This improvement does not come at the expense of latency. Instead, latency decreases by around 6× for both median and tail metrics.
 
-
-| Scheduler | Report                                                                                                                            | Latency (ms) | RPS  | Total Requests |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---- | -------------- |
-| CFS-LLF   | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfsllf.html) | 54–210       | 47.5 | 8550           |
-| CFS       | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfs.html)    | 590–1800     | 37.6 | 6770           |
-
-| Scheduler | Report                                                                                                                            | Latency (ms) | RPS  | Total Requests |
-| --------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------ | ---- | -------------- |
-| EEVDF-LLF   | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfsllf.html) | 54–210       | 47.5 | 8550           |
-| EEVDF     | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-eevdf.html)  | 280–1100     | 42.3 | 7609           |
-
-
 The joint improvement in throughput and latency can be attributed not to a typical throughput–latency trade-off, but to the mitigation of CPU overhead. A detailed root-cause analysis is presented in Section §3.1 of our [paper](https://arxiv.org/abs/2508.15703), based on the `resctl` open-loop benchmark and `ftrace` kernel instrumentation. 
+
+### CFS comparison
+
+| Scheduler | Report                                                                                                                            | Median latency (ms) | Tail latency (ms) | RPS  | Total requests |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ----------------- | ---- | -------------- |
+| CFS-LLF   | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfsllf.html) | 54                  | 100               | 47.5 | 8550           |
+| CFS       | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-report-cfs.html)    | 590                 | 1400              | 37.6 | 6770           |
+
+### EEVDF comparison
+
+| Scheduler | Report                                                                                                                               | Median Latency (ms) | Tail Latency (ms) | RPS  | Total requests |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------- | ----------------- | ---- | -------------- |
+| EEVDF-LLF | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-results/eevdfllf.html) | 60                  | 420              | 46.4 | 8355           |
+| EEVDF     | [View Report](https://htmlpreview.github.io/?https://github.com/isstaif/CFS-LLF_main/blob/main/cluster/locust-results/eevdf.html)    | 240                 | 750              | 42.8 | 7705           |
+
 
 The demo below illustrates the CPU overhead problem, where a significant portion of CPU time is spent within the kernel scheduler itself (i.e., the schedule() function), causing the CPU to appear fully utilized. Under LLF, after mitigating this overhead, the average effective CPU utilization is reduced to around 40%.
 
